@@ -32,11 +32,11 @@
             <h3>Booking Flights</h3>
             <div class="input-group">
                 <label for="">Flying From</label>
-                <input class="inp-style" type="text" name="" placeholder="Dhake, Bangladesh">
+                <input class="inp-style" type="text" name="" placeholder="Rajshahi, Bangladesh">
             </div>
             <div class="input-group">
                 <label for="">Flying To</label>
-                <input class="inp-style" type="text" name="" placeholder="New York, United States">
+                <input class="inp-style" type="text" name="" placeholder="London, United Kingdom">
             </div>
             <div class="inputs">
                 <div class="input-group">
@@ -50,23 +50,23 @@
             </div>
             <div class="input-group f-class">
                 <div>
-                    <label for="" id="case-total">First Class ($00)</label>
-                    <input class="inp-style inp-width" type="number" name="" value="0" id="case-count">
+                    <label for="" id="fClass-total">First Class ($00)</label>
+                    <input class="inp-style inp-width" type="number" name="" value="0" id="fClass-count">
                 </div>
                 <div class="plus-minus-btn">
-                    <p> <span onclick="handleProductChange('case', true)">+</span> <span
-                            onclick="handleProductChange('case', false)">-</span> </p>
+                    <p> <span class="pointer" onclick="handleBuyingTickets('fClass', true)">+</span> <span
+                            class="pointer" onclick="handleBuyingTickets('fClass', false)">-</span> </p>
                 </div>
             </div>
 
             <div class="input-group f-class">
                 <div>
-                    <label for="" id="phone-total">Economy ($00)</label>
-                    <input class="inp-style inp-width" type="number" name="" value="0" id="phone-count">
+                    <label for="" id="economy-total">Economy ($00)</label>
+                    <input class="inp-style inp-width" type="number" name="" value="0" id="economy-count">
                 </div>
                 <div class="plus-minus-btn">
-                    <p> <span onclick="handleProductChange('phone', true)">+</span> <span
-                            onclick="handleProductChange('phone', false)">-</span> </p>
+                    <p> <span class="pointer" onclick="handleBuyingTickets('economy', true)">+</span> <span
+                            class="pointer" onclick="handleBuyingTickets('economy', false)">-</span> </p>
                 </div>
             </div>
             <div class="calculations">
@@ -75,7 +75,7 @@
                         <p>Subtotal</p>
                     </div>
                     <div class="right">
-                        <p id="total-price">$500</p>
+                        <p id="subtotal-price">$00</p>
                     </div>
                 </div>
 
@@ -84,7 +84,7 @@
                         <p>Charge 10% VAT</p>
                     </div>
                     <div class="right">
-                        <p id="tax-amount">$50</p>
+                        <p id="vat-amount">$00</p>
                     </div>
                 </div>
                 <hr>
@@ -93,7 +93,7 @@
                         <h4>Total</h4>
                     </div>
                     <div class="right">
-                        <p id="grand-price">$550</p>
+                        <p id="grand-price">$000</p>
                     </div>
                 </div>
             </div>
@@ -110,61 +110,62 @@
 
         <!--Thank You-->
 
-        <!-- JavaScript -->
+        <!-- Start JavaScript -->
+
         <script>
 
-            // phone and case function
+            // function handleBuyingTickets for buying tickets
 
-            function handleProductChange(product, isIncrease) {
-                const productInput = document.getElementById(product + '-count');
-                const productCount = parseInt(productInput.value);
-                // const productCount = getInputValue('phone');
-                let productNewCount = productCount;
+            function handleBuyingTickets(tickets, isIncrease) {
+                const ticketsInput = document.getElementById(tickets + '-count');
+                const ticketsCount = parseInt(ticketsInput.value);
+                let ticketsNewCount = ticketsCount;
+                // conditional statement for counting tickets
                 if (isIncrease == true) {
-                    productNewCount = productCount + 1;
+                    ticketsNewCount = ticketsCount + 1;
                 }
-                if (isIncrease == false && productCount > 0) {
-                    productNewCount = productCount - 1;
+                if (isIncrease == false && ticketsCount > 0) {
+                    ticketsNewCount = ticketsCount - 1;
                 }
-                productInput.value = productNewCount;
-                // const phoneTotal = phoneNewCount * 100;
-                let productTotal = 0;
-
-                if (product == 'phone') {
-                    productTotal = productNewCount * 100;
-                    document.getElementById(product + '-total').innerText = 'Economy ($' + productTotal + ')';
+                ticketsInput.value = ticketsNewCount;
+                let ticketsTotal = 0;
+                // conditional statement for counting tickets amount
+                if (tickets == 'fClass') {
+                    ticketsTotal = ticketsNewCount * 150;
+                    document.getElementById(tickets + '-total').innerText = 'First Class ($' + ticketsTotal + ')';
                 }
-                if (product == 'case') {
-                    productTotal = productNewCount * 150;
-                    document.getElementById(product + '-total').innerText = 'First Class ($' + productTotal + ')';
+                if (tickets == 'economy') {
+                    ticketsTotal = ticketsNewCount * 100;
+                    document.getElementById(tickets + '-total').innerText = 'Economy ($' + ticketsTotal + ')';
                 }
-
+                // Callback function
                 calculateTotal();
             }
 
-            // total price function
+            // function calculateTotal for total price
 
             function calculateTotal() {
-                const phoneInput = document.getElementById('phone-count');
-                const phoneCount = parseInt(phoneInput.value);
-
-                const caseCount = getInputValue('case');
-
-                const totalPrice = phoneCount * 100 + caseCount * 150;
-                document.getElementById('total-price').innerText = '$' + totalPrice;
-
-                const tax = totalPrice * 0.1;
-                document.getElementById('tax-amount').innerText = '$' + tax;
-
-                const grandPrice = totalPrice + tax;
+                const economyInput = document.getElementById('economy-count');
+                const economyCount = parseInt(economyInput.value);
+                
+                const fClassCount = getInputValue('fClass');
+                // subtotal statement
+                const subtotalPrice = economyCount * 100 + fClassCount * 150;
+                document.getElementById('subtotal-price').innerText = '$' + subtotalPrice;
+                // vat statement
+                const vat = subtotalPrice * 0.1;
+                document.getElementById('vat-amount').innerText = '$' + vat;
+                // grand price statement
+                const grandPrice = subtotalPrice + vat;
                 document.getElementById('grand-price').innerText = '$' + grandPrice;
             }
 
-            // total price one function
-            function getInputValue(product) {
-                const productInput = document.getElementById(product + '-count');
-                const productCount = parseInt(productInput.value);
-                return productCount;
+            // function for input value
+
+            function getInputValue(tickets) {
+                const ticketsInput = document.getElementById(tickets + '-count');
+                const ticketsCount = parseInt(ticketsInput.value);
+                return ticketsCount;
             }
 
         </script>
