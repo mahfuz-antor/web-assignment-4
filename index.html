@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Booking</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!--Header and Menu Section-->
+    <header class="container">
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a class="active" href="#">Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!--Booking Section-->
+    <main class="main-content container">
+        <div class="booking-form">
+            <h3>Booking Flights</h3>
+            <div class="input-group">
+                <label for="">Flying From</label>
+                <input class="inp-style" type="text" name="" placeholder="Dhake, Bangladesh">
+            </div>
+            <div class="input-group">
+                <label for="">Flying To</label>
+                <input class="inp-style" type="text" name="" placeholder="New York, United States">
+            </div>
+            <div class="inputs">
+                <div class="input-group">
+                    <label" for="">Departure</label>
+                        <input class="inp-style" type="date" name="">
+                </div>
+                <div class="input-group">
+                    <label for="">Return</label>
+                    <input class="inp-style" type="date" name="">
+                </div>
+            </div>
+            <div class="input-group f-class">
+                <div>
+                    <label for="" id="case-total">First Class ($00)</label>
+                    <input class="inp-style inp-width" type="number" name="" value="0" id="case-count">
+                </div>
+                <div class="plus-minus-btn">
+                    <p> <span onclick="handleProductChange('case', true)">+</span> <span
+                            onclick="handleProductChange('case', false)">-</span> </p>
+                </div>
+            </div>
+
+            <div class="input-group f-class">
+                <div>
+                    <label for="" id="phone-total">Economy ($00)</label>
+                    <input class="inp-style inp-width" type="number" name="" value="0" id="phone-count">
+                </div>
+                <div class="plus-minus-btn">
+                    <p> <span onclick="handleProductChange('phone', true)">+</span> <span
+                            onclick="handleProductChange('phone', false)">-</span> </p>
+                </div>
+            </div>
+            <div class="calculations">
+                <div class="amount">
+                    <div class="left">
+                        <p>Subtotal</p>
+                    </div>
+                    <div class="right">
+                        <p id="total-price">$500</p>
+                    </div>
+                </div>
+
+                <div class="amount">
+                    <div class="left">
+                        <p>Charge 10% VAT</p>
+                    </div>
+                    <div class="right">
+                        <p>$50</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="amount">
+                    <div class="left">
+                        <h4>Total</h4>
+                    </div>
+                    <div class="right">
+                        <p>$550</p>
+                    </div>
+                </div>
+            </div>
+            <button class="btn-style">Book Now</button>
+        </div>
+
+        <div class="booking-content">
+            <h1>discover <br> around the world</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicingelit. Provident voluptatibus quam fuga laborumalias
+                veniam libero autem quasi maxime ullam vero nama imi dolor, architecto ab facilis eaque deserunt nobise
+                voluptatibus quam</p>
+        </div>
+        </section>
+
+        <!--Thank You-->
+        <!-- JavaScript -->
+        <script>
+
+            // phone and case function
+
+            function handleProductChange(product, isIncrease) {
+                const productInput = document.getElementById(product + '-count');
+                const productCount = parseInt(productInput.value);
+                // const productCount = getInputValue('phone');
+                let productNewCount = productCount;
+                if (isIncrease == true) {
+                    productNewCount = productCount + 1;
+                }
+                if (isIncrease == false && productCount > 0) {
+                    productNewCount = productCount - 1;
+                }
+                productInput.value = productNewCount;
+                // const phoneTotal = phoneNewCount * 100;
+                let productTotal = 0;
+
+                if (product == 'phone') {
+                    productTotal = productNewCount * 100;
+                    document.getElementById(product + '-total').innerText = 'Economy ($' + productTotal + ')';
+                }
+                if (product == 'case') {
+                    productTotal = productNewCount * 150;
+                    document.getElementById(product + '-total').innerText = 'First Class ($' + productTotal + ')';
+                }
+
+                calculateTotal();
+            }
+
+            // total price function
+
+            function calculateTotal() {
+                const phoneInput = document.getElementById('phone-count');
+                const phoneCount = parseInt(phoneInput.value);
+
+                const caseCount = getInputValue('case');
+
+                const totalPrice = phoneCount * 100 + caseCount * 150;
+                document.getElementById('total-price').innerText = '$' + totalPrice;
+            }
+
+            // total price one function
+            function getInputValue(product) {
+                const productInput = document.getElementById(product + '-count');
+                const productCount = parseInt(productInput.value);
+                return productCount;
+            }
+
+
+            // // case function created
+
+            // function handleProductChange (isIncrease) {
+            //     const caseInput = document.getElementById('case-count');
+            //     const caseCount = parseInt(caseInput.value);
+            //     let caseNewCount = caseCount
+            //     if(isIncrease == true){
+            //         caseNewCount = caseCount + 1;
+            //     }
+            //     if(isIncrease == false && caseCount > 0){
+            //         caseNewCount = caseCount -1;
+            //     }
+            //     caseInput.value = caseNewCount;
+            //     const caseTotal = caseNewCount * 150;
+            //     document.getElementById('case-total').innerText = 'First Class ($' + caseTotal + ')';
+            // }
+
+            // // phone function
+
+
+            // function handlePhoneChange (isIncrease) {
+            //     const phoneInput = document.getElementById('phone-count');
+            //     const phoneCount = parseInt(phoneInput.value);
+            //     let phoneNewCount = phoneCount
+            //     if(isIncrease == true){
+            //         phoneNewCount = phoneCount + 1;
+            //     }
+            //     if(isIncrease == false && phoneCount > 0){
+            //         phoneNewCount = phoneCount -1;
+            //     }
+            //     phoneInput.value = phoneNewCount;
+            //     const phoneTotal = phoneNewCount * 100;
+            //     document.getElementById('phone-total').innerText = 'Economy ($' + phoneTotal + ')';
+            // }
+
+
+
+
+
+
+            // // increase operator
+            // document.getElementById('case-increase').addEventListener('click', function () {
+            //     const caseInput = document.getElementById('case-count');
+            //     const caseCount = parseInt(caseInput.value);
+            //     const caseNewCount = caseCount + 1;
+
+            //     caseInput.value = caseNewCount;
+            //     const caseTotal = caseNewCount * 150;
+            //     document.getElementById('case-total').innerText = 'First Class (&' + caseTotal + ')';
+            // });
+            // // decrease operator
+
+            // document.getElementById('case-decrease').addEventListener('click', function () {
+            //     const caseInput = document.getElementById('case-count');
+            //     const caseCount = parseInt(caseInput.value);
+            //     const caseNewCount = caseCount - 1;
+            //     caseInput.value = caseNewCount;
+            //     const caseTotal = caseNewCount * 150;
+            //     document.getElementById('case-total').innerText = 'First Class (&' + caseTotal + ')';
+            // });
+
+        </script>
+
+</body>
+
+</html>
