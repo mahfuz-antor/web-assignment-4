@@ -84,7 +84,7 @@
                         <p>Charge 10% VAT</p>
                     </div>
                     <div class="right">
-                        <p>$50</p>
+                        <p id="tax-amount">$50</p>
                     </div>
                 </div>
                 <hr>
@@ -93,7 +93,7 @@
                         <h4>Total</h4>
                     </div>
                     <div class="right">
-                        <p>$550</p>
+                        <p id="grand-price">$550</p>
                     </div>
                 </div>
             </div>
@@ -109,6 +109,7 @@
         </section>
 
         <!--Thank You-->
+
         <!-- JavaScript -->
         <script>
 
@@ -151,6 +152,12 @@
 
                 const totalPrice = phoneCount * 100 + caseCount * 150;
                 document.getElementById('total-price').innerText = '$' + totalPrice;
+
+                const tax = totalPrice * 0.1;
+                document.getElementById('tax-amount').innerText = '$' + tax;
+
+                const grandPrice = totalPrice + tax;
+                document.getElementById('grand-price').innerText = '$' + grandPrice;
             }
 
             // total price one function
@@ -159,68 +166,6 @@
                 const productCount = parseInt(productInput.value);
                 return productCount;
             }
-
-
-            // // case function created
-
-            // function handleProductChange (isIncrease) {
-            //     const caseInput = document.getElementById('case-count');
-            //     const caseCount = parseInt(caseInput.value);
-            //     let caseNewCount = caseCount
-            //     if(isIncrease == true){
-            //         caseNewCount = caseCount + 1;
-            //     }
-            //     if(isIncrease == false && caseCount > 0){
-            //         caseNewCount = caseCount -1;
-            //     }
-            //     caseInput.value = caseNewCount;
-            //     const caseTotal = caseNewCount * 150;
-            //     document.getElementById('case-total').innerText = 'First Class ($' + caseTotal + ')';
-            // }
-
-            // // phone function
-
-
-            // function handlePhoneChange (isIncrease) {
-            //     const phoneInput = document.getElementById('phone-count');
-            //     const phoneCount = parseInt(phoneInput.value);
-            //     let phoneNewCount = phoneCount
-            //     if(isIncrease == true){
-            //         phoneNewCount = phoneCount + 1;
-            //     }
-            //     if(isIncrease == false && phoneCount > 0){
-            //         phoneNewCount = phoneCount -1;
-            //     }
-            //     phoneInput.value = phoneNewCount;
-            //     const phoneTotal = phoneNewCount * 100;
-            //     document.getElementById('phone-total').innerText = 'Economy ($' + phoneTotal + ')';
-            // }
-
-
-
-
-
-
-            // // increase operator
-            // document.getElementById('case-increase').addEventListener('click', function () {
-            //     const caseInput = document.getElementById('case-count');
-            //     const caseCount = parseInt(caseInput.value);
-            //     const caseNewCount = caseCount + 1;
-
-            //     caseInput.value = caseNewCount;
-            //     const caseTotal = caseNewCount * 150;
-            //     document.getElementById('case-total').innerText = 'First Class (&' + caseTotal + ')';
-            // });
-            // // decrease operator
-
-            // document.getElementById('case-decrease').addEventListener('click', function () {
-            //     const caseInput = document.getElementById('case-count');
-            //     const caseCount = parseInt(caseInput.value);
-            //     const caseNewCount = caseCount - 1;
-            //     caseInput.value = caseNewCount;
-            //     const caseTotal = caseNewCount * 150;
-            //     document.getElementById('case-total').innerText = 'First Class (&' + caseTotal + ')';
-            // });
 
         </script>
 
